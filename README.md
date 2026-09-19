@@ -1,7 +1,17 @@
-# STREAK v1.3
+# STREAK v1.4
 
-- Iconos compactos + icono personalizado desde el teclado.
-- Interfaz sin textos explicativos innecesarios.
-- Modo claro automático de 06:00 a 17:59.
-- Modo oscuro automático de 18:00 a 05:59.
-- Rachas, calendario, estadísticas y configuración.
+Sube **los archivos descomprimidos** a la raíz del repositorio de GitHub Pages:
+
+- index.html
+- manifest.webmanifest
+- sw.js
+
+No subas el archivo ZIP.
+
+Después de hacer el commit, abre la URL de **GitHub Pages** (no `index.html` desde la pestaña Code).
+
+v1.4:
+- Calendario accesible desde cada meta.
+- Fechas corregidas para usar la fecha local del teléfono.
+- Caché PWA actualizado para forzar la nueva versión.
+- Interfaz más limpia.
