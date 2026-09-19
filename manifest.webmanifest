@@ -1,7 +1,7 @@
 {
-  "name": "STREAK — Disciplina hoy",
+  "name": "STREAK — Rachas",
   "short_name": "STREAK",
-  "description": "App minimalista para crear metas y mantener rachas.",
+  "description": "App de rachas",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#000000",

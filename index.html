@@ -90,7 +90,8 @@ h3{font-size:16px}
 .input{width:100%;height:50px;border:1px solid #333;background:#202020;color:#fff;border-radius:15px;padding:0 15px;outline:none}
 .input:focus{border-color:#777}
 .icon-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.icon-choice{height:48px;border-radius:15px;background:#202020;border:1px solid #303030;font-size:20px}
+.icon-choice{height:48px;border-radius:15px;background:#202020;border:1px solid #303030;font-size:20px;transition:.16s}.icon-choice:active{transform:scale(.94)}
+.own-icon-row{display:flex;gap:8px;margin-top:9px}.custom-icon-input{width:76px;text-align:center;font-size:22px;padding:0}.custom-icon-btn{height:50px;flex:1}
 .icon-choice.selected{background:#fff;color:#000;border-color:#fff}
 .option{display:flex;align-items:center;justify-content:space-between;padding:14px;background:#202020;border:1px solid #303030;border-radius:16px;margin-top:8px}
 .option-left{display:flex;gap:10px;align-items:center;font-size:14px}
@@ -116,7 +117,7 @@ h3{font-size:16px}
 .month{font-weight:700}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;text-align:center}
 .cal-day{font-size:11px;color:#777;height:32px;display:grid;place-items:center}
-.cal-date{height:34px;display:grid;place-items:center;font-size:12px;border-radius:50%;position:relative}
+.cal-date{width:34px;height:34px;justify-self:center;display:grid;place-items:center;font-size:12px;border-radius:50%;position:relative}
 .cal-date.done{background:#fff;color:#000}
 .cal-date.today{box-shadow:0 0 0 1px var(--accent);color:#fff}
 .cal-date.done.today{background:var(--accent);color:#000}
@@ -126,11 +127,11 @@ h3{font-size:16px}
 .stat-icon{font-size:18px}
 .stat-number{font-size:28px;font-weight:800;letter-spacing:-.05em;margin-top:7px}
 .stat-label{font-size:11px;color:#888;margin-top:2px}
-.chart{height:155px;display:flex;align-items:end;gap:7px;padding:20px 12px 8px}
+.chart{height:170px;display:flex;align-items:end;gap:13px;padding:24px 16px 12px;margin-top:8px}
 .bar-wrap{flex:1;height:100%;display:flex;align-items:end;justify-content:center}
 .bar{width:100%;max-width:25px;border-radius:8px 8px 3px 3px;background:linear-gradient(to top,#555,#fff);min-height:5px}
-.bar-label{font-size:9px;color:#777;margin-top:6px;text-align:center}
-.chart-col{flex:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+.bar-label{font-size:9px;color:#777;text-align:center;min-height:11px}
+.chart-col{flex:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:7px}
 .quote{padding:20px;text-align:center;color:#aaa;font-size:13px;line-height:1.6}
 .settings-group{margin:20px 0}
 .settings-title{font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.12em;margin:0 4px 8px}
@@ -171,6 +172,33 @@ h3{font-size:16px}
 .hidden{display:none!important}
 .day-choice{height:40px;border-radius:13px;background:#202020;border:1px solid #303030;color:#999;font-size:12px}
 .day-choice.selected{background:#fff;color:#000;border-color:#fff;font-weight:700}
+
+/* Automatic appearance: light 06:00–17:59, dark 18:00–05:59 */
+:root.light{
+  --bg:#f5f5f7;--surface:#ffffff;--surface-2:#f0f0f2;--surface-3:#e7e7ea;
+  --text:#111111;--muted:#6d6d72;--line:#d9d9dd;
+}
+:root.light body{background:#f5f5f7}
+:root.light .app-shell{background:#f5f5f7}
+:root.light .card{background:linear-gradient(145deg,#fff,#f5f5f7);border-color:#dedee2}
+:root.light .hero-card:after{background:rgba(255,154,77,.12)}
+:root.light .icon-btn,.light .goal-icon,.light .goal-check,.light .option,
+:root.light .input,.light .stat-card,.light .settings-row,.light .achievement{background:#fff;border-color:#dedee2;color:#111}
+:root.light .goal-progress{background:#dedee2}
+:root.light .bottom-nav{background:rgba(250,250,252,.92);border-top-color:#dddde1}
+:root.light .nav-item{color:#85858b}.light .nav-item.active{color:#111}
+:root.light .add-nav{border-color:#f5f5f7;background:#111;color:#fff}
+:root.light .sheet{background:#f7f7f8;border-color:#dddde1}
+:root.light .radio{border-color:#888}.light .radio.on{border-color:#111}
+:root.light .radio.on:after{background:#111}
+:root.light .toggle{background:#c9c9ce}.light .toggle.on{background:#111}.light .toggle span{background:#fff}
+:root.light .primary{background:#111;color:#fff}
+:root.light .secondary{background:#e9e9ec;border-color:#d7d7db;color:#111}
+:root.light .success-overlay{background:radial-gradient(circle at 50% 42%,#fff3e7 0,#f7f7f8 42%,#ededf0 80%)}
+:root.light .streak-ring:before{background:#fff}
+:root.light .cal-date.future{color:#aaa}
+:root.light .splash{background:#f5f5f7;color:#111}
+
 </style>
 </head>
 <body>
@@ -207,7 +235,7 @@ h3{font-size:16px}
 
 <main id="stats" class="screen">
   <div class="topbar">
-    <div><h1>Estadísticas</h1><p class="subtitle">Tu progreso en un solo lugar.</p></div>
+    <div><h1>Estadísticas</h1></div>
   </div>
   <div class="card" style="padding:4px;display:flex">
     <button id="tabGeneral" class="primary" style="height:40px;border-radius:13px;font-size:12px" onclick="setStatsTab('general')">General</button>
@@ -254,17 +282,7 @@ h3{font-size:16px}
       <div class="settings-left"><span class="row-icon">📅</span>Inicio de semana</div>
       <span id="weekStartLabel" class="muted small">Lunes ›</span>
     </div>
-  </div>
-
-  <div class="settings-group">
-    <div class="settings-title">Notificaciones</div>
-    <div class="settings-row" onclick="configureReminder()" style="cursor:pointer">
-      <div class="settings-left"><span class="row-icon">🔔</span>Recordatorio general</div>
-      <span id="globalReminderLabel" class="muted small">Desactivado ›</span>
-    </div>
-  </div>
-
-  <div class="settings-group">
+  </div><div class="settings-group">
     <div class="settings-title">Datos</div>
     <div class="settings-row">
       <div class="settings-left"><span class="row-icon">↺</span>Restablecer demo</div>
@@ -273,7 +291,7 @@ h3{font-size:16px}
   </div>
 
   <p class="muted small" style="text-align:center;margin-top:30px">
-    STREAK v1.1 · Tus datos se guardan en este dispositivo.
+    STREAK v1.3 · Tus datos se guardan en este dispositivo.
   </p>
 </main>
 
@@ -331,7 +349,7 @@ function seed(){
   const iso=d=>d.toISOString().slice(0,10);
   const daysAgo=n=>{let d=new Date(now);d.setDate(d.getDate()-n);return iso(d)};
   return {
-    settings:{sound:true,vibration:true,userName:'Orion',restDays:1,weekStart:'monday',globalReminder:''},
+    settings:{sound:true,vibration:true,userName:'Orion',restDays:1,weekStart:'monday'},
     goals:[
       {id:1,name:'Leer',icon:'📖',frequency:'daily',reminder:'20:00',created:daysAgo(21),completed:Array.from({length:14},(_,i)=>daysAgo(i)),best:21},
       {id:2,name:'Entrenar',icon:'🏃',frequency:'daily',reminder:'',created:daysAgo(14),completed:Array.from({length:7},(_,i)=>daysAgo(i)),best:7},
@@ -343,7 +361,7 @@ function seed(){
 function loadData(){
   try{
     const d=JSON.parse(localStorage.getItem(KEY))||seed();
-    d.settings=Object.assign({sound:true,vibration:true,userName:'Orion',restDays:1,weekStart:'monday',globalReminder:''},d.settings||{});
+    d.settings=Object.assign({sound:true,vibration:true,userName:'Orion',restDays:1,weekStart:'monday'},d.settings||{});
     d.goals=(d.goals||[]).map(g=>Object.assign({frequency:'daily',days:[],reminder:''},g));
     return d;
   }catch(e){return seed()}
@@ -400,7 +418,18 @@ function showScreen(id){
   document.getElementById(id).classList.add('active');
   document.getElementById('navHome').classList.toggle('active',id==='home');
   document.getElementById('navStats').classList.toggle('active',id==='stats');
-  if(id==='home')renderHome();
+  if(id==='home')
+function applyAutoTheme(){
+  const hour=new Date().getHours();
+  const isLight=hour>=6 && hour<18;
+  document.documentElement.classList.toggle('light',isLight);
+  const meta=document.querySelector('meta[name="theme-color"]');
+  if(meta)meta.setAttribute('content',isLight?'#f5f5f7':'#000000');
+}
+applyAutoTheme();
+setInterval(applyAutoTheme,60000);
+
+renderHome();
   if(id==='stats')renderStats();
   if(id==='detail')renderDetail();
 }
@@ -422,16 +451,26 @@ function createForm(g=null){
   <div class="form-label">Elige un icono</div>
   <div class="icon-grid">${['📖','🏃','💧','🧘','💻','🎸','🧠','🥗','✍️','🎯'].map(x=>`<button class="icon-choice ${x===icon?'selected':''}" onclick="chooseIcon(this)">${x}</button>`).join('')}</div>
   <input type="hidden" id="goalIcon" value="${icon}">
+  <div class="own-icon-row">
+    <input id="customIcon" class="input custom-icon-input" maxlength="2" placeholder="😊" value="">
+    <button type="button" class="secondary custom-icon-btn" onclick="useCustomIcon()">Usar mi icono</button>
+  </div>
   <div class="form-label">¿Cada cuánto?</div>
   <div class="option" onclick="chooseFrequency('daily')"><div class="option-left"><span id="radioDaily" class="radio ${!g || g.frequency!=='specific'?'on':''}"></span>Todos los días</div></div>
   <div class="option" onclick="chooseFrequency('specific')"><div class="option-left"><span id="radioSpecific" class="radio ${g?.frequency==='specific'?'on':''}"></span>Días específicos</div></div>
   <div id="specificDays" class="hidden" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:8px">
     ${['L','M','X','J','V','S','D'].map((x,i)=>`<button type="button" class="day-choice ${(g?.days||[]).includes(i)?'selected':''}" data-day="${i}" onclick="toggleDayChoice(this)">${x}</button>`).join('')}
   </div>
-  <div class="form-label">Recordatorio (opcional)</div>
-  <div class="option"><div class="option-left">◷ <input id="goalReminder" type="time" style="background:none;border:0;color:#fff;outline:none" value="${g?.reminder||''}"></div><button id="reminderToggle" class="toggle ${g?.reminder?'on':''}" onclick="this.classList.toggle('on')"><span></span></button></div>
   <button class="primary" style="margin-top:22px" onclick="saveGoal(${isEdit?g.id:'null'})">${isEdit?'Guardar cambios':'Crear meta'}</button>
   ${isEdit?`<button class="text-btn danger" style="width:100%;margin-top:12px" onclick="deleteGoal(${g.id})">Eliminar meta</button>`:''}`;
+}
+function useCustomIcon(){
+  const input=document.getElementById('customIcon');
+  const value=(input?.value||'').trim();
+  if(!value){showToast('Escribe un icono');return}
+  document.querySelectorAll('.icon-choice').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('goalIcon').value=value;
+  showToast('Icono seleccionado ✓');
 }
 function chooseIcon(btn){
   document.querySelectorAll('.icon-choice').forEach(b=>b.classList.remove('selected'));
@@ -447,15 +486,15 @@ function saveGoal(id){
   const name=document.getElementById('goalName').value.trim();
   if(!name){showToast('Escribe una meta');return}
   const icon=document.getElementById('goalIcon').value;
-  const reminder=document.getElementById('goalReminder').value;
+  const reminder='';
   const specific=[...document.querySelectorAll('.day-choice.selected')].map(b=>Number(b.dataset.day));
   const frequency=document.getElementById('radioSpecific').classList.contains('on')?'specific':'daily';
   if(frequency==='specific' && !specific.length){showToast('Elige al menos un día');return}
-  if(id==='null'){
-    data.goals.unshift({id:Date.now(),name,icon,frequency,days:specific,reminder,created:today(),completed:[],best:0});
+  if(id===null || id==='null'){
+    data.goals.unshift({id:Date.now(),name,icon,frequency,days:specific,created:today(),completed:[],best:0});
     playTap();vibrate(20);showToast('Meta creada ✓');
   }else{
-    const g=data.goals.find(x=>x.id===id);Object.assign(g,{name,icon,reminder,frequency,days:specific});showToast('Cambios guardados');
+    const g=data.goals.find(x=>x.id===id);Object.assign(g,{name,icon,frequency,days:specific});showToast('Cambios guardados');
   }
   save();closeModal();renderHome();if(selectedGoalId)renderDetail();
 }
@@ -497,7 +536,7 @@ function renderDetail(){
       <div class="cal-grid">${labels.map(x=>`<div class="cal-day">${x}</div>`).join('')}${cells}</div>
     </div>
     <button class="primary" style="margin-top:18px" onclick="toggleToday(${g.id})">${done?'✓ Completado hoy':'✓ Completar hoy'}</button>
-    ${done?'<p class="center muted small" style="margin-top:10px">Tócalo otra vez si quieres desmarcar hoy.</p>':''}
+    ${done?'':''}
   `;
 }
 function toggleToday(id){
@@ -547,8 +586,7 @@ function renderStats(){
     </div>
     <div class="section-head"><h2>Actividad reciente</h2></div>
     <div class="card chart">${bars.map(x=>`<div class="chart-col"><div class="bar-wrap"><div class="bar" style="height:${Math.max(5,(x.n/Math.max(1,all.length))*100)}%"></div></div><div class="bar-label">${new Date(x.d+'T12:00:00').toLocaleDateString('es-PE',{weekday:'short'}).slice(0,2)}</div></div>`).join('')}</div>
-    <div class="card quote">“La constancia siempre da frutos.”</div>
-    <div class="section-head" style="margin-top:24px"><h2>Hitos</h2><button class="text-btn" onclick="openAchievements()">Ver todos</button></div>`;
+    <div class="section-head" style="margin-top:24px"><div><h2>Hitos</h2></div><button class="text-btn" onclick="openAchievements()">Ver todos</button></div>`;
 }
 function openAchievements(){
   document.getElementById('sheet').innerHTML=`<div class="grabber"></div><div class="sheet-head"><h2>Hitos</h2><button class="icon-btn" onclick="closeModal()">×</button></div>
@@ -574,7 +612,7 @@ function renderSettingsLabels(){
   if(n)n.textContent=(s.userName?.trim()||'Sin nombre')+' ›';
   if(r)r.textContent=s.restDays===0?'Ninguno ›':`${s.restDays} por semana ›`;
   if(w)w.textContent=s.weekStart==='sunday'?'Domingo ›':'Lunes ›';
-  if(gr)gr.textContent=s.globalReminder?`${s.globalReminder} ›`:'Desactivado ›';
+  
 }
 function editName(){
   document.getElementById('sheet').innerHTML=`<div class="grabber"></div>
@@ -607,34 +645,6 @@ function chooseWeekStart(){
   document.getElementById('modal').classList.add('open');
 }
 function setWeekStart(v){data.settings.weekStart=v;save();closeModal();renderSettingsLabels();renderDetail();showToast('Inicio de semana actualizado')}
-function configureReminder(){
-  const current=data.settings.globalReminder||'';
-  document.getElementById('sheet').innerHTML=`<div class="grabber"></div>
-  <div class="sheet-head"><h2>Recordatorio general</h2><button class="icon-btn" onclick="closeModal()">×</button></div>
-  <p class="muted small">La hora se guarda como preferencia. Las notificaciones del navegador requieren permiso y dependen de la plataforma.</p>
-  <div class="form-label">Hora</div>
-  <input id="globalReminder" class="input" type="time" value="${current}">
-  <button class="primary" style="margin-top:20px" onclick="saveGlobalReminder()">Guardar</button>
-  <button class="text-btn" style="width:100%;margin-top:8px" onclick="clearGlobalReminder()">Desactivar</button>`;
-  document.getElementById('modal').classList.add('open');
-}
-function saveGlobalReminder(){
-  const value=document.getElementById('globalReminder').value;
-  data.settings.globalReminder=value;save();closeModal();renderSettingsLabels();showToast(value?`Recordatorio: ${value}`:'Desactivado');
-}
-function clearGlobalReminder(){data.settings.globalReminder='';save();closeModal();renderSettingsLabels();showToast('Recordatorio desactivado')}
-
-function toggleSetting(k){data.settings[k]=!data.settings[k];save();updateToggles();if(k==='sound'&&data.settings.sound)playTap()}
-function updateToggles(){document.getElementById('soundToggle').classList.toggle('on',data.settings.sound);document.getElementById('vibeToggle').classList.toggle('on',data.settings.vibration)}
-function vibrate(ms){if(data.settings.vibration&&navigator.vibrate)navigator.vibrate(ms)}
-let audioCtx;
-function tone(freq,duration=.06,type='sine'){
-  if(!data.settings.sound)return;
-  try{
-    audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
-    const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.0001,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.06,audioCtx.currentTime+.01);g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+duration);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+duration+.02);
-  }catch(e){}
-}
 function playTap(){tone(620,.045,'sine')}
 function playSuccess(){tone(520,.08,'sine');setTimeout(()=>tone(780,.13,'sine'),65)}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),1800)}
